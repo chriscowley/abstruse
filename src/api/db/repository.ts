@@ -372,7 +372,7 @@ export function pingGogsRepository(data: any): Promise<any> {
 export function pingGiteaRepository(data: any): Promise<any> {
   return new Promise((resolve, reject) => {
     const saveData = generateGiteaRepositoryData(data);
-    new Repository().where({ gogs_id: saveData.gogs_id }).fetch()
+    new Repository().where({ gitea_id: saveData.gitea_id }).fetch()
       .then(repo => {
         if (!repo) {
           new Repository().save(saveData, { method: 'insert' })
@@ -466,7 +466,7 @@ export function createGogsPullRequest(data: any): Promise<any> {
 export function createGiteaPullRequest(data: any): Promise<any> {
   return new Promise((resolve, reject) => {
     let repoId = data.repository.id;
-    new Repository().where({ gogs_id: repoId }).fetch()
+    new Repository().where({ gitea_id: repoId }).fetch()
       .then(repo => {
         if (!repo) {
           const repoData = generateGiteaRepositoryData(data);
@@ -588,7 +588,7 @@ export function synchronizeGogsPullRequest(data: any): Promise<any> {
 export function synchronizeGiteaPullRequest(data: any): Promise<any> {
   return new Promise((resolve, reject) => {
     let repoId = data.repository.id;
-    new Repository().where({ gogs_id: repoId }).fetch()
+    new Repository().where({ gitea_id: repoId }).fetch()
       .then(repository => {
         if (!repository) {
           const repoData = generateGiteaRepositoryData(data);
